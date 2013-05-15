@@ -356,7 +356,8 @@ json_path_compile (JsonPath    *path,
 {
   const char *p, *end_p;
   PathNode *root = NULL;
-  GList *nodes, *l;
+  GList *nodes = NULL;
+  GList *l = NULL;
 
   p = expression;
 
@@ -635,6 +636,14 @@ json_path_compile (JsonPath    *path,
           break;
 
         default:
+          if (nodes == NULL)
+            {
+              g_set_error(error, JSON_PATH_ERROR,
+                          JSON_PATH_ERROR_INVALID_QUERY,
+                          _("Invalid first character '%c'"),
+                          *p);
+              return FALSE;
+            }
           break;
         }
 
