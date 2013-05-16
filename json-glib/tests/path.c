@@ -59,6 +59,20 @@ static const struct {
     JSON_PATH_ERROR_INVALID_QUERY,
   },
   {
+    "INVALID: invalid first character",
+    "/",
+    NULL,
+    FALSE,
+    JSON_PATH_ERROR_INVALID_QUERY,
+  },
+  {
+    "INVALID: missing member name or wildcard after dot",
+    "$.store.",
+    NULL,
+    FALSE,
+    JSON_PATH_ERROR_INVALID_QUERY,
+  },
+  {
     "Title of the first book in the store, using objct notation.",
     "$.store.book[0].title",
     "[\"Sayings of the Century\"]",
@@ -130,6 +144,16 @@ static const struct {
     "[\"red\",\"19.95\"]",
     TRUE,
   },
+  {
+    "The root node.",
+    "$",
+    "[{\"store\":{\"book\":[{\"category\":\"reference\",\"author\":\"Nigel Rees\",\"title\":\"Sayings of the Century\",\"price\":\"8.95\"},"
+                           "{\"category\":\"fiction\",\"author\":\"Evelyn Waugh\",\"title\":\"Sword of Honour\",\"price\":\"12.99\"},"
+                           "{\"category\":\"fiction\",\"author\":\"Herman Melville\",\"title\":\"Moby Dick\",\"isbn\":\"0-553-21311-3\",\"price\":\"8.99\"},"
+                           "{\"category\":\"fiction\",\"author\":\"J. R. R. Tolkien\",\"title\":\"The Lord of the Rings\",\"isbn\":\"0-395-19395-8\",\"price\":\"22.99\"}],"
+                 "\"bicycle\":{\"color\":\"red\",\"price\":\"19.95\"}}}]",
+    TRUE,
+  }
 };
 
 static void
